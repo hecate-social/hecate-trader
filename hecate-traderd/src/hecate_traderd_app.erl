@@ -27,9 +27,12 @@ stop(_State) ->
 start_cowboy() ->
     SocketPath = traderd_paths:socket_path("api.sock"),
     cleanup_socket_file(SocketPath),
+    StaticDir = static_dir(),
     Dispatch = cowboy_router:compile([
         {'_', [
             {"/health", traderd_health_api, []},
+            {"/manifest", traderd_manifest_api, []},
+            {"/ui/[...]", cowboy_static, {dir, StaticDir, [{mimetypes, cow_mimetypes, all}]}},
             {"/api/[...]", traderd_api_handler, []}
         ]}
     ]),
@@ -42,6 +45,10 @@ start_cowboy() ->
     },
     {ok, _} = cowboy:start_clear(traderd_http, TransOpts, ProtoOpts),
     ok.
+
+static_dir() ->
+    PrivDir = code:priv_dir(hecate_traderd),
+    filename:join(PrivDir, "static").
 
 cleanup_socket() ->
     SocketPath = traderd_paths:socket_path("api.sock"),

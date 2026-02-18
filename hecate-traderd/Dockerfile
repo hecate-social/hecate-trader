@@ -41,12 +41,11 @@ WORKDIR /app
 # Copy release from builder
 COPY --from=builder /build/_build/prod/rel/hecate_traderd ./
 
-# Environment — convention: ~/.hecate/hecate-traderd expands via $HOME
-ENV HOME=/app
+# HOME is set by the quadlet (Environment=HOME=%h) so convention
+# paths (~/.hecate/hecate-traderd) resolve to the real user home.
+# Healthcheck deferred to quadlet for the same reason.
 
-# Health check via socket presence (convention path)
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD test -S /app/.hecate/hecate-traderd/sockets/api.sock || exit 1
+
 
 # Run
 ENTRYPOINT ["/app/bin/hecate_traderd"]
