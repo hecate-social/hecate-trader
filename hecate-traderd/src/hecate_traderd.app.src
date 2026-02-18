@@ -1,6 +1,6 @@
 {application, hecate_traderd, [
     {description, "Hecate Trader - AI Stock Trading Agents Daemon"},
-    {vsn, "0.1.0"},
+    {vsn, "0.2.0"},
     {registered, [hecate_traderd_sup]},
     {mod, {hecate_traderd_app, []}},
     {applications, [
