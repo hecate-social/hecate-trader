@@ -21,8 +21,8 @@ RUN apk add --no-cache curl
 # Copy built SPA
 COPY --from=builder /app/build /usr/share/nginx/html
 
-# Copy nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx config (replaces main config to run as root for socket access)
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 5174
 
