@@ -13,7 +13,7 @@ init(Req0, State) ->
             Body = json:encode(#{
                 <<"name">> => <<"trader">>,
                 <<"version">> => list_to_binary(Vsn),
-                <<"icon">> => <<"\xF0\x9F\x93\x88"/utf8>>,
+                <<"icon">> => <<16#1F4C8/utf8>>,
                 <<"description">> => <<"AI Stock Trading Agents">>
             }),
             Req1 = cowboy_req:reply(200, #{
