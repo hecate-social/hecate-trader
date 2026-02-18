@@ -41,16 +41,12 @@ WORKDIR /app
 # Copy release from builder
 COPY --from=builder /build/_build/prod/rel/hecate_traderd ./
 
-# Environment
+# Environment — convention: ~/.hecate/hecate-traderd expands via $HOME
 ENV HOME=/app
-ENV TRADERD_DATA_DIR=/data
 
-# Create data directory
-RUN mkdir -p /data
-
-# Health check via socket presence
+# Health check via socket presence (convention path)
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD test -S /data/sockets/api.sock || exit 1
+    CMD test -S /app/.hecate/hecate-traderd/sockets/api.sock || exit 1
 
 # Run
 ENTRYPOINT ["/app/bin/hecate_traderd"]

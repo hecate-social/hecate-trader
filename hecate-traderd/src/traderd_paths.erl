@@ -31,14 +31,9 @@
 
 -spec base_dir() -> file:filename().
 base_dir() ->
-    case os:getenv("TRADERD_DATA_DIR") of
-        false ->
-            case application:get_env(hecate_traderd, data_dir) of
-                {ok, Dir} -> expand_path(Dir);
-                undefined -> expand_path("~/.hecate/hecate-traderd")
-            end;
-        EnvDir ->
-            EnvDir
+    case application:get_env(hecate_traderd, data_dir) of
+        {ok, Dir} -> expand_path(Dir);
+        undefined -> expand_path("~/.hecate/hecate-traderd")
     end.
 
 -spec sqlite_dir() -> file:filename().

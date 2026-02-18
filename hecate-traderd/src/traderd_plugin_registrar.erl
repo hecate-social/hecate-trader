@@ -42,10 +42,5 @@ attempt_registration() ->
     end.
 
 resolve_daemon_socket() ->
-    case os:getenv("HECATE_DAEMON_SOCKET") of
-        false ->
-            Home = os:getenv("HOME"),
-            filename:join([Home, ".hecate", "hecate-daemon", "sockets", "api.sock"]);
-        Path ->
-            Path
-    end.
+    Home = os:getenv("HOME"),
+    filename:join([Home, ".hecate", "hecate-daemon", "sockets", "api.sock"]).
