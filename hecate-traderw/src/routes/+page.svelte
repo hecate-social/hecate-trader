@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { health, connectionStatus } from '$lib/stores/trader.js';
+	import { onMount, onDestroy } from 'svelte';
+	import { health, connectionStatus, startPolling, stopPolling } from '$lib/stores/trader.js';
+
+	onMount(() => startPolling());
+	onDestroy(() => stopPolling());
 </script>
 
 <div class="flex flex-col gap-6 p-6">
