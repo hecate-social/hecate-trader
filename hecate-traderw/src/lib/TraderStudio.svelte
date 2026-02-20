@@ -1,3 +1,5 @@
+<svelte:options customElement={{ tag: "trader-studio", shadow: "none" }} />
+
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 

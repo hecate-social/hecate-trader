@@ -14,7 +14,8 @@ init(Req0, State) ->
                 <<"name">> => <<"trader">>,
                 <<"version">> => list_to_binary(Vsn),
                 <<"icon">> => <<16#1F4C8/utf8>>,
-                <<"description">> => <<"AI Stock Trading Agents">>
+                <<"description">> => <<"AI Stock Trading Agents">>,
+                <<"tag">> => <<"trader-studio">>
             }),
             Req1 = cowboy_req:reply(200, #{
                 <<"content-type">> => <<"application/json">>,
